@@ -1,4 +1,21 @@
-const CoinList = ({ selectedOption, loading, coins, handleCoinSelect }) => {
+const CoinList = ({
+  selectedOption,
+  loading,
+  coins,
+  setName,
+  setValue,
+  setPrice,
+  setSelectedOption,
+}) => {
+  const handleCoinSelect = (e) => {
+    const value = e.target.value;
+    const [name, priceString] = value.split(" (");
+    const price = parseFloat(priceString.match(/\$(\d+\.\d+)/)[1]);
+    setName(name);
+    setValue(name);
+    setPrice(price);
+    setSelectedOption(e.target.value);
+  };
   return (
     <div>
       {loading ? "" : <h2>There are {coins.length}🪙s...</h2>}

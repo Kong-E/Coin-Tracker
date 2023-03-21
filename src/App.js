@@ -7,27 +7,19 @@ import Result from "./components/Result";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState("See the Coin List");
+
   const [loading, setLoading] = useState(true); // 로딩 여부
+
+  const [coins, setCoins] = useState([]); // 코인 목록 설정
+
   const [calculate, setCalculate] = useState(false); // Calculate 클릭 감지
 
   const [value, setValue] = useState(""); // 코인 이름 input 감지
   const [number, setNumber] = useState(""); // 자산 input 감지
 
-  const [coins, setCoins] = useState([]); // 코인 목록 설정
-
   const [name, setName] = useState(); // 확정된 코인의 이름
   const [price, setPrice] = useState(); // 확정된 코인의 가격
   const [asset, setAsset] = useState(); // 확정된 나의 자산
-
-  const handleCoinSelect = (e) => {
-    const value = e.target.value;
-    const [name, priceString] = value.split(" (");
-    const price = parseFloat(priceString.match(/\$(\d+\.\d+)/)[1]);
-    setName(name);
-    setValue(name);
-    setPrice(price);
-    setSelectedOption(e.target.value);
-  };
 
   useEffect(() => {
     fetch("https://api.coinpaprika.com/v1/tickers")
@@ -46,7 +38,10 @@ function App() {
         selectedOption={selectedOption}
         loading={loading}
         coins={coins}
-        handleCoinSelect={handleCoinSelect}
+        setName={setName}
+        setValue={setValue}
+        setPrice={setPrice}
+        setSelectedOption={setSelectedOption}
       />
 
       <Form
