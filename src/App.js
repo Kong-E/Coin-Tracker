@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import styles from "./App.module.css";
+import CoinList from "./components/CoinList";
+import Form from "./components/Form";
+import Refresh from "./components/Refresh";
+import Result from "./components/Result";
 
 function App() {
+  const [selectedOption, setSelectedOption] = useState("See the Coin List");
   const [loading, setLoading] = useState(true); // 로딩 여부
-  const [clicked, setClicked] = useState(false); // Calculate 클릭 감지
-
-  const [selectedOption, setSelectedOption] = useState("See the Coin List"); //
-  const [coins, setCoins] = useState([]); // 코인 목록 설정
+  const [calculate, setCalculate] = useState(false); // Calculate 클릭 감지
 
   const [value, setValue] = useState(""); // 코인 이름 input 감지
   const [number, setNumber] = useState(""); // 자산 input 감지
+
+  const [coins, setCoins] = useState([]); // 코인 목록 설정
 
   const [name, setName] = useState(); // 확정된 코인의 이름
   const [price, setPrice] = useState(); // 확정된 코인의 가격
@@ -44,76 +48,43 @@ function App() {
       });
   }, []);
 
-  console.log(name);
   return (
     <div className={styles.body}>
-      <h1>🪙 Coin Calculator 🪙</h1>
+      <h1>🪙 Calculator</h1>
 
-      {/*coin list*/}
-      {loading ? "" : <h2>There are {coins.length}🪙s...</h2>}
-      {loading ? (
-        <strong>로딩 중...</strong>
-      ) : (
-        <select value={selectedOption} onChange={handleCoinSelect}>
-          <option>See the Coin List</option>
-          {coins.map((coin) => (
-            <option key={coin.id}>
-              {coin.name} ({coin.symbol}): ${coin.quotes.USD.price.toFixed(5)}{" "}
-              USD
-            </option>
-          ))}
-        </select>
-      )}
-
-      {/*type*/}
-      <input
-        value={name ? name : value}
-        placeholder="Type the name"
-        onChange={(e) => setValue(e.target.value)}
-        type="text"
+      <CoinList
+        selectedOption={selectedOption}
+        loading={loading}
+        coins={coins}
+        handleCoinSelect={handleCoinSelect}
       />
-      <input
-        value={number}
-        placeholder="Type your own money"
-        onChange={(e) => setNumber(e.target.value)}
-        type="number"
+
+      <Form
+        value={value}
+        setValue={setValue}
+        number={number}
+        setNumber={setNumber}
+        onSubmit={onSubmit}
+        name={name}
       />
-      <input value="Submit" type="button" onClick={onSubmit} />
 
-      {name && asset
-        ? coins.filter((coin) => coin.name === name && asset)[0] && (
-            <div key={coins[0].id}>
-              <span>
-                You select:&nbsp;
-                {coins[0].name} ({coins[0].symbol}): $
-                {coins[0].quotes.USD.price.toFixed(5)} USD
-              </span>
-              <button
-                onClick={() => setClicked(true)}
-                style={{ marginLeft: 5 }}
-              >
-                Calculate
-              </button>
-            </div>
-          )
-        : null}
+      <Result
+        name={name}
+        asset={asset}
+        coins={coins}
+        calculate={calculate}
+        setCalculate={setCalculate}
+        price={price}
+      />
 
-      {clicked ? `You can buy ${name} by ${asset / price}.` : null}
-
-      <div>
-        <button
-          onClick={() => {
-            setClicked(false);
-            setName();
-            setAsset();
-            setValue("");
-            setNumber("");
-            setSelectedOption("See the Coin List");
-          }}
-        >
-          Refresh
-        </button>
-      </div>
+      <Refresh
+        setCalculate={setCalculate}
+        setName={setName}
+        setAsset={setAsset}
+        setValue={setValue}
+        setNumber={setNumber}
+        setSelectedOption={setSelectedOption}
+      />
     </div>
   );
 }
