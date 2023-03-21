@@ -1,4 +1,23 @@
-const Form = ({ value, setValue, number, setNumber, onSubmit, name }) => {
+const Form = ({
+  value,
+  setValue,
+  number,
+  setNumber,
+  name,
+  setName,
+  setAsset,
+  coins,
+  setPrice,
+}) => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log("submit");
+    setName(value);
+    setAsset(number);
+    coins.forEach(
+      (coin) => coin.name === value && setPrice(coin.quotes.USD.price)
+    );
+  };
   return (
     <div>
       <form onSubmit={onSubmit}>

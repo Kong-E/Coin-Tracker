@@ -19,16 +19,6 @@ function App() {
   const [price, setPrice] = useState(); // 확정된 코인의 가격
   const [asset, setAsset] = useState(); // 확정된 나의 자산
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log("submit");
-    setName(value);
-    setAsset(number);
-    coins.forEach(
-      (coin) => coin.name === value && setPrice(coin.quotes.USD.price)
-    );
-  };
-
   const handleCoinSelect = (e) => {
     const value = e.target.value;
     const [name, priceString] = value.split(" (");
@@ -64,8 +54,11 @@ function App() {
         setValue={setValue}
         number={number}
         setNumber={setNumber}
-        onSubmit={onSubmit}
         name={name}
+        setName={setName}
+        setAsset={setAsset}
+        coins={coins}
+        setPrice={setPrice}
       />
 
       <Result
