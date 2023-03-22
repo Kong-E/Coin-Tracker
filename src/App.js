@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import styles from "./App.module.css";
 import CoinList from "./components/CoinList";
 import Form from "./components/Form";
-import Refresh from "./components/Refresh";
 import Result from "./components/Result";
+import { Title, Subtitle, Summary, Paragraph } from "./components";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState("See the Coin List");
@@ -31,9 +30,8 @@ function App() {
   }, []);
 
   return (
-    <div className={styles.body}>
-      <h1>🪙 Calculator</h1>
-
+    <div className="flex flex-col justify-center items-center text-white bg-slate-900 h-screen">
+      <Title>Calculat🪙r</Title>
       <CoinList
         selectedOption={selectedOption}
         loading={loading}
@@ -54,6 +52,8 @@ function App() {
         setAsset={setAsset}
         coins={coins}
         setPrice={setPrice}
+        setCalculate={setCalculate}
+        setSelectedOption={setSelectedOption}
       />
 
       <Result
@@ -65,14 +65,11 @@ function App() {
         price={price}
       />
 
-      <Refresh
-        setCalculate={setCalculate}
-        setName={setName}
-        setAsset={setAsset}
-        setValue={setValue}
-        setNumber={setNumber}
-        setSelectedOption={setSelectedOption}
-      />
+      {/* <Paragraph className="h-40 bg-sky-500 line-clamp-4">
+        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
+        consectetur, adipisci velit..." "There is no one who loves pain itself,
+        who seeks after it and wants to have it, simply because it is pain..."
+      </Paragraph> */}
     </div>
   );
 }

@@ -19,6 +19,7 @@ const Result = ({ name, asset, coins, calculate, setCalculate, price }) => {
                 {newArr[0].quotes.USD.price.toFixed(5)} USD
               </span>
               <button
+                className="btn btn-primary"
                 onClick={() => setCalculate(true)}
                 style={{ marginLeft: 5 }}
               >
