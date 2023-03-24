@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CoinList from "./components/CoinList";
 import Form from "./components/Form";
 import Result from "./components/Result";
-import { Title, Subtitle, Summary, Paragraph } from "./components";
+import { Title } from "./components";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState("See the Coin List");
