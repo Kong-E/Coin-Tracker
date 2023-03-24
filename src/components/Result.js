@@ -15,7 +15,7 @@ const Result = ({ name, asset, coins, calculate, setCalculate, price }) => {
             <>
               <div>
                 <span className="text-xl font-semibold">
-                  You selected&nbsp;
+                  👉 You selected&nbsp;
                 </span>
                 <span className="text-xl font-bold">
                   {newArr[0].name} ({newArr[0].symbol}) $
@@ -36,8 +36,8 @@ const Result = ({ name, asset, coins, calculate, setCalculate, price }) => {
       ) : null}
 
       {calculate ? (
-        <div className="mt-4 text-3xl font-semibold text-center">
-          You can buy{" "}
+        <div className="mt-4 text-2xl font-semibold text-center">
+          👉 You can buy{" "}
           <span className="text-yellow-400">
             {name} by {asset / price}
           </span>
