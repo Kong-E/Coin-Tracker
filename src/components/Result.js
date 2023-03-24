@@ -10,16 +10,20 @@ const Result = ({ name, asset, coins, calculate, setCalculate, price }) => {
   return (
     <div>
       {newArr.length > 0 ? (
-        <div key={newArr[0].id}>
-          {name && asset && (
+        <div key={newArr[0].id} className="flex flex-col justify-center mt-3">
+          {name && asset && !calculate && (
             <>
-              <span>
-                You select:&nbsp;
-                {newArr[0].name} ({newArr[0].symbol}): $
-                {newArr[0].quotes.USD.price.toFixed(5)} USD
-              </span>
+              <div>
+                <span className="text-xl font-semibold">
+                  You selected&nbsp;
+                </span>
+                <span className="text-xl font-bold">
+                  {newArr[0].name} ({newArr[0].symbol}) $
+                  {newArr[0].quotes.USD.price.toFixed(5)} USD
+                </span>
+              </div>
               <button
-                className="btn btn-primary"
+                className="mt-3 btn btn-primary"
                 onClick={() => setCalculate(true)}
                 style={{ marginLeft: 5 }}
               >
@@ -31,7 +35,14 @@ const Result = ({ name, asset, coins, calculate, setCalculate, price }) => {
         </div>
       ) : null}
 
-      {calculate ? `You can buy ${name} by ${asset / price}.` : null}
+      {calculate ? (
+        <div className="mt-4 text-3xl font-semibold text-center">
+          You can buy{" "}
+          <span className="text-yellow-400">
+            {name} by {asset / price}
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 };

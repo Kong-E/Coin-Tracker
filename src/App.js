@@ -30,7 +30,7 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center text-white bg-slate-900 h-screen">
+    <div className="flex flex-col items-center justify-center w-screen h-screen text-white bg-slate-900">
       <Title>Calculat🪙r</Title>
       <CoinList
         selectedOption={selectedOption}

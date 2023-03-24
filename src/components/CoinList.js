@@ -19,7 +19,7 @@ const CoinList = ({
     setSelectedOption(e.target.value);
   };
   return (
-    <div className="flex flex-col w-screen justify-center items-center">
+    <div className="flex flex-col items-center justify-center w-screen">
       {loading ? (
         ""
       ) : (
@@ -28,10 +28,10 @@ const CoinList = ({
         </Subtitle>
       )}
       {loading ? (
-        <strong>로딩 중...</strong>
+        <Subtitle className="mt-10 mb-8">로딩 중...</Subtitle>
       ) : (
         <select
-          className="mb-5 w-1/4 bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="mb-5 bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           value={selectedOption}
           onChange={handleCoinSelect}
         >
